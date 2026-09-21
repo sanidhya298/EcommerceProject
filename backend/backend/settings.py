@@ -146,6 +146,8 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # setting of pillow so images will visible
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
