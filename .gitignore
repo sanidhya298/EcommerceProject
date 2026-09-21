@@ -3,7 +3,6 @@ frontend/dist/
 frontend/.env
 backend/.env
 
-backend/media/
 
 __pycache__/
 *.pyc
