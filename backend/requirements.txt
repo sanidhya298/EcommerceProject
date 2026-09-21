@@ -8,7 +8,7 @@ filelock==3.32.6
 gunicorn==26.2.0
 pillow==12.3.0
 platformdirs==4.11.8
-psycopg2==2.9.13
+psycopg2-binary==2.9.13
 PyJWT==2.14.0
 python-discovery==1.6.0
 sqlparse==0.6.0
