@@ -1,10 +1,10 @@
 import { useCart } from "../context/CartContext";
 import { Link } from "react-router-dom";
+import { mediaUrl } from "../utils/api";
 
 
 function CartPage() {
     const { cartItems,total, removeFromCart, updateQuantity } = useCart();
-    const BASEURL = import.meta.env.VITE_DJANGO_BASE_URL;
     console.log("Cart Items:", cartItems);
 
     return (
@@ -22,7 +22,7 @@ function CartPage() {
                             <div className="flex items-center gap-4">
                                 {item.product_image && (
                                     <img
-                                        src={`${BASEURL}${item.product_image}`}
+                                        src={mediaUrl(item.product_image)}
                                         alt={item.product_name}
                                         className="w-20 h-20 object-cover rounded"
                                     />

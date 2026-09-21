@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { authFetch } from "../utils/auth";
+import { API_BASE_URL } from "../utils/api";
 const CheckoutPage = () => {
-  const BASEURL = import.meta.env.VITE_DJANGO_BASE_URL;
   const navigate = useNavigate();
   const { clearCart } = useCart();
   const [form, setForm] = useState({
@@ -21,7 +21,7 @@ const CheckoutPage = () => {
     e.preventDefault();
 
     try {
-      const res = await authFetch(`${BASEURL}/api/orders/create/`, {
+      const res = await authFetch(`${API_BASE_URL}/api/orders/create/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

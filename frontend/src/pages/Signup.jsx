@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../utils/api";
 
 function Signup() {
-  const BASE = import.meta.env.VITE_DJANGO_BASE_URL;
   const [form, setForm] = useState({ username: "", email: "", password: "", password2: "" });
   const [msg, setMsg] = useState("");
   const nav = useNavigate();
@@ -13,7 +13,7 @@ function Signup() {
     e.preventDefault();
     setMsg("");
     try {
-      const res = await fetch(`${BASE}/api/register/`, {
+      const res = await fetch(`${API_BASE_URL}/api/register/`, {
         method: "POST",
         headers: {"Content-Type":"application/json"},
         body: JSON.stringify(form)

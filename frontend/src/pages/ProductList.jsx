@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import ProductCard from '../components/ProductCard'
+import { API_BASE_URL } from '../utils/api'
 
 const ProductList = () => {
 
@@ -8,12 +9,11 @@ const ProductList = () => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
     
-    const BASEURL = import.meta.env.VITE_DJANGO_BASE_URL;
     useEffect(() => {
             
         // fetch('http://127.0.0.1:8000/api/products/') or
         // .env mai baseurl lelo fir brbr pura likhne ki need nhi
-        fetch(`${BASEURL}/api/products/`)
+        fetch(`${API_BASE_URL}/api/products/`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("failed to Fetch products");

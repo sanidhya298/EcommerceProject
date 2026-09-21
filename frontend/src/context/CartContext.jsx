@@ -1,17 +1,17 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { authFetch,getAccessToken } from "../utils/auth";
+import { API_BASE_URL } from "../utils/api";
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-    const BASEURL = import.meta.env.VITE_DJANGO_BASE_URL;
     const [cartItems, setCartItems] = useState([]);
     const [total, setTotal] = useState(0);
 
     //Fetch Cart form BE
     const fetchCart = async () => {
         try {
-            const res = await authFetch(`${BASEURL}/api/cart/`);
+            const res = await authFetch(`${API_BASE_URL}/api/cart/`);
             if (!res.ok) {
                 throw new Error(`Failed to fetch cart (${res.status})`);
             }
@@ -30,7 +30,7 @@ export const CartProvider = ({ children }) => {
     //Add Product to Cart
     const addToCart = async (productId) => {
         try {
-            const res = await authFetch(`${BASEURL}/api/cart/add/`, {
+            const res = await authFetch(`${API_BASE_URL}/api/cart/add/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -49,7 +49,7 @@ export const CartProvider = ({ children }) => {
     //Remove Product from Cart
     const removeFromCart = async (itemId) => {
         try{
-            await authFetch(`${BASEURL}/api/cart/remove/`, {
+            await authFetch(`${API_BASE_URL}/api/cart/remove/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -69,7 +69,7 @@ export const CartProvider = ({ children }) => {
             return;
         }
         try{
-            await authFetch(`${BASEURL}/api/cart/update/`, {
+            await authFetch(`${API_BASE_URL}/api/cart/update/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

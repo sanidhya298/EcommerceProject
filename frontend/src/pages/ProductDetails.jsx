@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { API_BASE_URL, mediaUrl } from "../utils/api";
 
 
 function ProductDetails() {
     const { id } = useParams();
-    const BASEURL = import.meta.env.VITE_DJANGO_BASE_URL;
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -13,7 +13,7 @@ function ProductDetails() {
 
 
     useEffect(() => {
-        fetch(`${BASEURL}/api/products/${id}/`)
+        fetch(`${API_BASE_URL}/api/products/${id}/`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("Failed to fetch product details");
@@ -28,7 +28,7 @@ function ProductDetails() {
                 setError(error.message);
                 setLoading(false);
             });
-    }, [id, BASEURL]);
+    }, [id]);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -55,7 +55,7 @@ function ProductDetails() {
             <div className="bg-white shadow-lg rounded-2xl p-8 max-w-3xl w-full">
                 <div className="flex flex-col md:flex-row gap-8">
                     <img
-                        src={`${product.image}`}
+                        src={mediaUrl(product.image)}
                         alt={product.name}
                         className="w-full md:w-1/2 h-auto object-cover rounded-lg"
                     />
