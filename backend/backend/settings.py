@@ -79,13 +79,23 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
+from urllib.parse import urlparse, unquote
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+db_url = urlparse(DATABASE_URL)
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ecommerce_db',
-        'USER':'postgres',
-        'PASSWORD':'ka2210',
-        'HOST':'localhost',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": db_url.path[1:],
+        "USER": db_url.username,
+        "PASSWORD": unquote(db_url.password),
+        "HOST": db_url.hostname,
+        "PORT": db_url.port or 5432,
+        "OPTIONS": {
+            "sslmode": "require",
+        },
     }
 }
 
